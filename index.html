@@ -1,57 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Datos</title>
-    <link rel="stylesheet" href="./style.css">
-    <script src="./script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Datos SenseCraft</title>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <header>
-        <h1>Panel de Datos Financieros</h1>
-    </header>
-    <main>
-        <div class="card" id="BTCUSDT">
-            <h2>BTC/USDT</h2>
-            <canvas id="chart-BTCUSDT"></canvas>
-            <p class="price" id="price-BTCUSDT">Cargando...</p>
-        </div>
-        <div class="card" id="XAU_EUR">
-            <h2>Oro (XAU/EUR)</h2>
-            <canvas id="chart-XAU_EUR"></canvas>
-            <p class="price" id="price-XAU_EUR">Cargando...</p>
-        </div>
-        <div class="card" id="SPX">
-            <h2>SP500</h2>
-            <canvas id="chart-SPX"></canvas>
-            <p class="price" id="price-SPX">Cargando...</p>
-        </div>
-        <div class="card" id="NVDA">
-            <h2>NVDA</h2>
-            <canvas id="chart-NVDA"></canvas>
-            <p class="price" id="price-NVDA">Cargando...</p>
-        </div>
-        <div class="card" id="TSLA">
-            <h2>TSLA</h2>
-            <canvas id="chart-TSLA"></canvas>
-            <p class="price" id="price-TSLA">Cargando...</p>
-        </div>
-        <div class="card" id="AAPL">
-            <h2>AAPL</h2>
-            <canvas id="chart-AAPL"></canvas>
-            <p class="price" id="price-AAPL">Cargando...</p>
-        </div>
-        <div class="card" id="AMZN">
-            <h2>AMZN</h2>
-            <canvas id="chart-AMZN"></canvas>
-            <p class="price" id="price-AMZN">Cargando...</p>
-        </div>
-        <div class="card" id="GOOGL">
-            <h2>GOOGL</h2>
-            <canvas id="chart-GOOGL"></canvas>
-            <p class="price" id="price-GOOGL">Cargando...</p>
-        </div>
-    </main>
+  <div id="container">
+    <div class="cuadro" id="btc"></div>
+    <div class="cuadro" id="eth"></div>
+    <div class="cuadro" id="sp500"></div>
+    <div class="cuadro" id="nasdaq"></div>
+    <div class="cuadro" id="apple"></div>
+    <div class="cuadro" id="microsoft"></div>
+    <div class="cuadro" id="google"></div>
+    <div class="cuadro" id="amazon"></div>
+  </div>
+
+  <script src="/script.js" defer></script>
 </body>
 </html>
