@@ -1,6 +1,7 @@
 {
   "name": "panel-datos-vercel-final",
   "version": "1.0.0",
-  "scripts": {},
-  "dependencies": {}
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
 }

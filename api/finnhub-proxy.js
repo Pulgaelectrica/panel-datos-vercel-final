@@ -1,17 +1,19 @@
+import fetch from "node-fetch";
+
 export default async function handler(req, res) {
   const { symbol } = req.query;
-  const key = process.env.FINNHUB_API_KEY;
+  const token = process.env.FINNHUB_API_KEY;
 
-  if (!key) {
-    return res.status(500).json({ error: "FINNHUB_API_KEY not configured" });
+  if (!token) {
+    return res.status(500).json({ error: "Falta la API key de Finnhub" });
   }
 
-  const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${key}`;
   try {
-    const r = await fetch(url);
+    const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${token}`);
     const data = await r.json();
     res.status(200).json(data);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error("Error proxy Finnhub:", err);
+    res.status(500).json({ error: "Error al obtener datos de Finnhub" });
   }
 }
