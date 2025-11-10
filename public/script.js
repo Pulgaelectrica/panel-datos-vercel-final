@@ -1,33 +1,35 @@
 const symbols = {
-  btc: 'BINANCE:BTCUSDT',
-  eth: 'BINANCE:ETHUSDT',
-  sp500: '^GSPC',
-  nasdaq: '^IXIC',
-  apple: 'AAPL',
-  microsoft: 'MSFT',
-  google: 'GOOGL',
-  amazon: 'AMZN'
+  btc: "BINANCE:BTCUSDT",
+  oro: "OANDA:XAU_EUR",
+  sp500: "INDEX:SPX",
+  nvda: "NASDAQ:NVDA",
+  tsla: "NASDAQ:TSLA",
+  aapl: "NASDAQ:AAPL",
+  amzn: "NASDAQ:AMZN",
+  googl: "NASDAQ:GOOGL"
 };
 
-async function obtenerPrecio(symbol, id) {
+async function fetchData(symbol) {
+  const res = await fetch(`/api/finnhub-proxy?symbol=${encodeURIComponent(symbol)}`);
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+async function updateBox(id, symbol) {
+  const el = document.getElementById(id);
   try {
-    const res = await fetch(`/api/finnhub-proxy?symbol=${symbol}`);
-    if (!res.ok) throw new Error(`Error ${res.status}`);
-    const data = await res.json();
-    const div = document.getElementById(id);
-    const change = data.dp || 0;
-    div.style.backgroundColor = change >= 0 ? '#008000' : '#b00000';
-    div.textContent = `${symbol.split(':').pop()} ${data.c?.toFixed(2) || '—'}`;
-  } catch (err) {
-    console.error(err);
+    const data = await fetchData(symbol);
+    const change = data.dp;
+    el.textContent = `${id.toUpperCase()} ${change.toFixed(2)}%`;
+    el.style.background = change >= 0 ? "green" : "red";
+  } catch {
+    el.textContent = `${id.toUpperCase()} ERROR`;
+    el.style.background = "gray";
   }
 }
 
-function actualizarTodo() {
-  for (const [id, symbol] of Object.entries(symbols)) {
-    obtenerPrecio(symbol, id);
-  }
+function updateAll() {
+  for (const [id, sym] of Object.entries(symbols)) updateBox(id, sym);
 }
-
-setInterval(actualizarTodo, 30000);
-actualizarTodo();
+updateAll();
+setInterval(updateAll, 60000);
